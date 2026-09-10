@@ -298,26 +298,7 @@ h1, h2, h3, h4 { text-wrap: balance; line-height: 1.08; letter-spacing: -0.02em;
   gap: .65rem;
   flex-shrink: 0;
 }
-.brand-mark { width: 40px; height: 40px; color: var(--navy-900); flex-shrink: 0; }
-.brand-word {
-  display: flex;
-  flex-direction: column;
-  line-height: 1.05;
-}
-.brand-word b {
-  font-family: var(--display);
-  font-weight: 800;
-  font-size: 1.05rem;
-  letter-spacing: .01em;
-  color: var(--navy-900);
-}
-.brand-word span {
-  font-size: .55rem;
-  font-weight: 700;
-  letter-spacing: .13em;
-  text-transform: uppercase;
-  color: var(--ink-mute);
-}
+.brand-logo { height: 32px; width: auto; flex-shrink: 0; }
 
 .nav-desktop { display: none; }
 .nav-desktop ul { display: flex; align-items: center; gap: 2rem; }
@@ -664,9 +645,6 @@ h1, h2, h3, h4 { text-wrap: balance; line-height: 1.08; letter-spacing: -0.02em;
   gap: 2.2rem;
   grid-template-columns: 1fr;
 }
-.footer-brand .brand-mark { color: var(--cream); }
-.footer-brand .brand-word b { color: var(--cream); }
-.footer-brand .brand-word span { color: rgba(244,248,250,0.5); }
 .footer-brand p { margin-top: 1rem; font-size: .88rem; max-width: 34ch; color: rgba(244,248,250,0.6); }
 .footer-col h4 {
   font-family: var(--display); font-size: .82rem; font-weight: 700;
@@ -787,6 +765,7 @@ h1, h2, h3, h4 { text-wrap: balance; line-height: 1.08; letter-spacing: -0.02em;
 @media (min-width: 960px) {
   .nav-desktop { display: block; }
   .hamburger { display: none; }
+  .brand-logo { height: 38px; }
   .hero .container { grid-template-columns: 1.1fr .9fr; }
   .value-grid { grid-template-columns: repeat(4, 1fr); }
   .products-grid { grid-template-columns: repeat(3, 1fr); }
