@@ -537,6 +537,20 @@ h1, h2, h3, h4 { text-wrap: balance; line-height: 1.08; letter-spacing: -0.02em;
 .qty-stepper input::-webkit-outer-spin-button,
 .qty-stepper input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
 
+.size-demo-trigger {
+  display: flex; align-items: center; justify-content: center; gap: .4rem;
+  width: 100%;
+  margin-top: .7rem;
+  padding: .55rem;
+  font-size: .82rem;
+  font-weight: 700;
+  color: var(--accent-dark);
+  border-radius: var(--radius-s);
+  transition: background-color .2s var(--ease-out), color .2s var(--ease-out);
+}
+.size-demo-trigger:hover { background: var(--bg-soft); color: var(--navy-900); }
+.size-demo-trigger svg { width: 16px; height: 16px; flex-shrink: 0; }
+
 .product-card.is-custom {
   border-style: dashed;
   border-color: rgba(15,42,63,0.28);
@@ -739,6 +753,57 @@ h1, h2, h3, h4 { text-wrap: balance; line-height: 1.08; letter-spacing: -0.02em;
 .cart-summary b { color: var(--navy-900); font-size: 1rem; }
 .cart-clear { text-align: center; font-size: .8rem; color: var(--ink-mute); font-weight: 600; }
 .cart-clear:hover { color: var(--danger); }
+
+/* --- Size demo modal --- */
+.demo-backdrop {
+  position: fixed; inset: 0;
+  background: rgba(10, 28, 43, 0.55);
+  backdrop-filter: blur(2px);
+  z-index: 85;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .3s var(--ease-out);
+}
+.demo-backdrop.is-open { opacity: 1; pointer-events: auto; }
+
+.size-demo-modal {
+  position: fixed;
+  top: 50%; left: 50%;
+  width: min(92vw, 460px);
+  max-height: 88vh;
+  overflow-y: auto;
+  background: var(--paper);
+  border-radius: var(--radius-l);
+  box-shadow: var(--shadow-l);
+  z-index: 90;
+  padding: 1.5rem;
+  transform: translate(-50%, -50%) scale(.94);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .3s var(--ease-out), transform .3s var(--ease-out);
+}
+.size-demo-modal.is-open { opacity: 1; transform: translate(-50%, -50%) scale(1); pointer-events: auto; }
+
+.size-demo-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; }
+.size-demo-eyebrow {
+  font-size: .72rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--accent-dark); margin-bottom: .3rem;
+}
+.size-demo-head h3 { font-size: 1.05rem; font-weight: 800; color: var(--navy-900); }
+.size-demo-stage {
+  margin-block: 1.1rem;
+  background: var(--bg);
+  border-radius: var(--radius-m);
+  padding: .5rem;
+}
+.size-demo-stage svg { width: 100%; height: auto; display: block; }
+.size-demo-hint { font-size: .85rem; color: var(--ink-mute); text-align: center; }
+.size-demo-foot { margin-top: 1.1rem; display: flex; justify-content: center; }
+
+@keyframes demoFadeIn { from { opacity: 0; } to { opacity: 1; } }
+.demo-in { opacity: 0; animation: demoFadeIn .35s var(--ease-out) forwards; }
+@keyframes demoDraw { to { stroke-dashoffset: 0; } }
+.demo-draw { animation: demoDraw .5s var(--ease-out) forwards; }
 
 /* =============================================================
    7. Effects / reduced motion

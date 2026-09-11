@@ -117,7 +117,12 @@
       "cart.send_whatsapp": "Enviar pedido por WhatsApp",
       "cart.send_email": "Enviar pedido por correo",
       "cart.clear": "Vaciar carrito",
-      "cart.remove": "Quitar"
+      "cart.remove": "Quitar",
+      "ui.view_size_demo": "Ver medida animada",
+      "sizeDemo.replay": "Reproducir de nuevo",
+      "sizeDemo.close": "Cerrar",
+      "sizeDemo.hint_roll": "Así se mide el ancho del papel y el diámetro del rollo.",
+      "sizeDemo.hint_label": "Así se mide el ancho y el alto de cada etiqueta."
     },
     en: {
       "brand.tagline": "Labels & Thermal Paper",
@@ -215,7 +220,12 @@
       "cart.send_whatsapp": "Send order via WhatsApp",
       "cart.send_email": "Send order via email",
       "cart.clear": "Clear cart",
-      "cart.remove": "Remove"
+      "cart.remove": "Remove",
+      "ui.view_size_demo": "See size animation",
+      "sizeDemo.replay": "Replay",
+      "sizeDemo.close": "Close",
+      "sizeDemo.hint_roll": "This is how paper width and roll diameter are measured.",
+      "sizeDemo.hint_label": "This is how each label's width and height are measured."
     }
   };
 
@@ -224,6 +234,13 @@
     "pos-57x40": { size: "57 x 40 mm", name: { es: DICT.es["product.pos.name"], en: DICT.en["product.pos.name"] } },
     "fiscal-80x60": { size: "80 x 60 mm", name: { es: DICT.es["product.fiscal60.name"], en: DICT.en["product.fiscal60.name"] } },
     "fiscal-80x65": { size: "80 x 65 mm", name: { es: DICT.es["product.fiscal65.name"], en: DICT.en["product.fiscal65.name"] } }
+  };
+
+  var SIZE_DEMOS = {
+    "balanza-57x40": { kind: "label", width: 57, height: 40 },
+    "pos-57x40": { kind: "roll", width: 57, diameter: 40 },
+    "fiscal-80x60": { kind: "roll", width: 80, diameter: 60 },
+    "fiscal-80x65": { kind: "roll", width: 80, diameter: 65 }
   };
 
   var LANG_KEY = "kronos_lang";
@@ -256,6 +273,7 @@
     try { localStorage.setItem(LANG_KEY, currentLang); } catch (e) {}
     renderCart();
     updateWhatsAppLinks();
+    if (typeof currentDemoId !== "undefined" && currentDemoId) renderSizeDemo(currentDemoId);
   }
 
   function initLanguage() {
@@ -545,6 +563,121 @@
   /* -----------------------------------------------------------
      7. WhatsApp / email order messages
      ----------------------------------------------------------- */
+  /* -----------------------------------------------------------
+     6b. Size demo (animated roll / label diagram)
+     ----------------------------------------------------------- */
+  var currentDemoId = null;
+
+  function buildRollDiagram(width, dia) {
+    var rectLeft = 70, rectRight = 230;
+    var circleCx = 70, circleCy = 95, circleR = 55;
+    var wLen = rectRight - rectLeft;
+    var dLen = 125 - 15;
+    return (
+      '<svg viewBox="0 0 260 210" fill="none" aria-hidden="true">' +
+        '<rect class="demo-in" style="animation-delay:.05s" x="' + rectLeft + '" y="40" width="' + (rectRight - rectLeft) + '" height="110" rx="6" fill="#fff" stroke="#0f2a3f" stroke-width="4"/>' +
+        '<line class="demo-in" style="animation-delay:.15s" x1="82" y1="46" x2="82" y2="144" stroke="#c7d2da" stroke-width="2"/>' +
+        '<line class="demo-in" style="animation-delay:.2s" x1="92" y1="46" x2="92" y2="144" stroke="#c7d2da" stroke-width="2"/>' +
+        '<circle class="demo-in" style="animation-delay:0s" cx="' + circleCx + '" cy="' + circleCy + '" r="' + circleR + '" fill="#fff" stroke="#0f2a3f" stroke-width="4"/>' +
+        '<circle class="demo-in" style="animation-delay:.1s" cx="' + circleCx + '" cy="' + circleCy + '" r="22" fill="none" stroke="#0f2a3f" stroke-width="4"/>' +
+        '<circle class="demo-in" style="animation-delay:.2s" cx="' + circleCx + '" cy="' + circleCy + '" r="6" fill="#0f2a3f"/>' +
+        '<line class="demo-draw" style="animation-delay:.6s;stroke-dasharray:' + wLen + ';stroke-dashoffset:' + wLen + '" x1="' + rectLeft + '" y1="22" x2="' + rectRight + '" y2="22" stroke="#f2a93b" stroke-width="3" stroke-linecap="round"/>' +
+        '<line class="demo-in" style="animation-delay:.6s" x1="' + rectLeft + '" y1="16" x2="' + rectLeft + '" y2="28" stroke="#f2a93b" stroke-width="3" stroke-linecap="round"/>' +
+        '<line class="demo-in" style="animation-delay:1.05s" x1="' + rectRight + '" y1="16" x2="' + rectRight + '" y2="28" stroke="#f2a93b" stroke-width="3" stroke-linecap="round"/>' +
+        '<text class="demo-in" style="animation-delay:1.1s" x="' + ((rectLeft + rectRight) / 2) + '" y="12" text-anchor="middle" font-family="Sora, sans-serif" font-weight="800" font-size="15" fill="#0f2a3f">' + width + ' mm</text>' +
+        '<line class="demo-draw" style="animation-delay:1.2s;stroke-dasharray:' + dLen + ';stroke-dashoffset:' + dLen + '" x1="15" y1="172" x2="125" y2="172" stroke="#f2a93b" stroke-width="3" stroke-linecap="round"/>' +
+        '<line class="demo-in" style="animation-delay:1.2s" x1="15" y1="166" x2="15" y2="178" stroke="#f2a93b" stroke-width="3" stroke-linecap="round"/>' +
+        '<line class="demo-in" style="animation-delay:1.65s" x1="125" y1="166" x2="125" y2="178" stroke="#f2a93b" stroke-width="3" stroke-linecap="round"/>' +
+        '<text class="demo-in" style="animation-delay:1.7s" x="70" y="196" text-anchor="middle" font-family="Sora, sans-serif" font-weight="800" font-size="15" fill="#0f2a3f">&#8960; ' + dia + ' mm</text>' +
+      '</svg>'
+    );
+  }
+
+  function buildLabelDiagram(width, height) {
+    var rx1 = 40, ry1 = 40, rw = 140, rh = 100;
+    var rx2 = rx1 + rw, ry2 = ry1 + rh;
+    var wLen = rw, hLen = rh;
+    return (
+      '<svg viewBox="0 0 270 210" fill="none" aria-hidden="true">' +
+        '<rect class="demo-in" style="animation-delay:0s" x="' + rx1 + '" y="' + ry1 + '" width="' + rw + '" height="' + rh + '" rx="10" fill="#fff" stroke="#0f2a3f" stroke-width="4"/>' +
+        '<rect class="demo-in" style="animation-delay:.15s" x="' + (rx1 + 16) + '" y="' + (ry1 + 16) + '" width="4" height="28" fill="#0f2a3f"/>' +
+        '<rect class="demo-in" style="animation-delay:.18s" x="' + (rx1 + 24) + '" y="' + (ry1 + 16) + '" width="7" height="28" fill="#0f2a3f"/>' +
+        '<rect class="demo-in" style="animation-delay:.21s" x="' + (rx1 + 35) + '" y="' + (ry1 + 16) + '" width="4" height="28" fill="#0f2a3f"/>' +
+        '<rect class="demo-in" style="animation-delay:.24s" x="' + (rx1 + 43) + '" y="' + (ry1 + 16) + '" width="9" height="28" fill="#0f2a3f"/>' +
+        '<rect class="demo-in" style="animation-delay:.27s" x="' + (rx1 + 56) + '" y="' + (ry1 + 16) + '" width="4" height="28" fill="#0f2a3f"/>' +
+        '<line class="demo-in" style="animation-delay:.35s" x1="' + (rx1 + 16) + '" y1="' + (ry1 + 58) + '" x2="' + (rx2 - 16) + '" y2="' + (ry1 + 58) + '" stroke="#8a99a6" stroke-width="4" stroke-linecap="round"/>' +
+        '<line class="demo-in" style="animation-delay:.4s" x1="' + (rx1 + 16) + '" y1="' + (ry1 + 72) + '" x2="' + (rx2 - 40) + '" y2="' + (ry1 + 72) + '" stroke="#8a99a6" stroke-width="4" stroke-linecap="round"/>' +
+        '<line class="demo-draw" style="animation-delay:.6s;stroke-dasharray:' + wLen + ';stroke-dashoffset:' + wLen + '" x1="' + rx1 + '" y1="22" x2="' + rx2 + '" y2="22" stroke="#f2a93b" stroke-width="3" stroke-linecap="round"/>' +
+        '<line class="demo-in" style="animation-delay:.6s" x1="' + rx1 + '" y1="16" x2="' + rx1 + '" y2="28" stroke="#f2a93b" stroke-width="3" stroke-linecap="round"/>' +
+        '<line class="demo-in" style="animation-delay:1.05s" x1="' + rx2 + '" y1="16" x2="' + rx2 + '" y2="28" stroke="#f2a93b" stroke-width="3" stroke-linecap="round"/>' +
+        '<text class="demo-in" style="animation-delay:1.1s" x="' + ((rx1 + rx2) / 2) + '" y="12" text-anchor="middle" font-family="Sora, sans-serif" font-weight="800" font-size="15" fill="#0f2a3f">' + width + ' mm</text>' +
+        '<line class="demo-draw" style="animation-delay:1.2s;stroke-dasharray:' + hLen + ';stroke-dashoffset:' + hLen + '" x1="200" y1="' + ry1 + '" x2="200" y2="' + ry2 + '" stroke="#f2a93b" stroke-width="3" stroke-linecap="round"/>' +
+        '<line class="demo-in" style="animation-delay:1.2s" x1="194" y1="' + ry1 + '" x2="206" y2="' + ry1 + '" stroke="#f2a93b" stroke-width="3" stroke-linecap="round"/>' +
+        '<line class="demo-in" style="animation-delay:1.65s" x1="194" y1="' + ry2 + '" x2="206" y2="' + ry2 + '" stroke="#f2a93b" stroke-width="3" stroke-linecap="round"/>' +
+        '<text class="demo-in" style="animation-delay:1.7s" x="214" y="' + ((ry1 + ry2) / 2 + 5) + '" text-anchor="start" font-family="Sora, sans-serif" font-weight="800" font-size="15" fill="#0f2a3f">' + height + ' mm</text>' +
+      '</svg>'
+    );
+  }
+
+  function renderSizeDemo(id) {
+    var demo = SIZE_DEMOS[id];
+    var product = PRODUCTS[id];
+    if (!demo || !product) return;
+    var stage = $("[data-size-demo-stage]");
+    var title = $("[data-size-demo-title]");
+    var eyebrow = $("[data-size-demo-eyebrow]");
+    var hint = $("[data-size-demo-hint]");
+    if (!stage || !title || !eyebrow || !hint) return;
+    title.textContent = product.name[currentLang] || product.name.es;
+    eyebrow.textContent = product.size;
+    stage.innerHTML = demo.kind === "label"
+      ? buildLabelDiagram(demo.width, demo.height)
+      : buildRollDiagram(demo.width, demo.diameter);
+    hint.textContent = t(demo.kind === "label" ? "sizeDemo.hint_label" : "sizeDemo.hint_roll");
+  }
+
+  function openSizeDemo(id) {
+    if (!SIZE_DEMOS[id]) return;
+    currentDemoId = id;
+    renderSizeDemo(id);
+    var modal = $("[data-size-demo-modal]");
+    var backdrop = $("[data-demo-backdrop]");
+    if (!modal || !backdrop) return;
+    modal.classList.add("is-open");
+    backdrop.classList.add("is-open");
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeSizeDemo() {
+    var modal = $("[data-size-demo-modal]");
+    var backdrop = $("[data-demo-backdrop]");
+    if (!modal || !backdrop) return;
+    modal.classList.remove("is-open");
+    backdrop.classList.remove("is-open");
+    document.body.style.overflow = "";
+  }
+
+  function initSizeDemo() {
+    $$("[data-size-demo-open]").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var card = btn.closest("[data-product-card]");
+        var id = card ? card.getAttribute("data-id") : null;
+        if (id) openSizeDemo(id);
+      });
+    });
+    var closeBtn = $("[data-demo-close]");
+    if (closeBtn) closeBtn.addEventListener("click", closeSizeDemo);
+    var backdrop = $("[data-demo-backdrop]");
+    if (backdrop) backdrop.addEventListener("click", closeSizeDemo);
+    var replayBtn = $("[data-demo-replay]");
+    if (replayBtn) replayBtn.addEventListener("click", function () {
+      if (currentDemoId) renderSizeDemo(currentDemoId);
+    });
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") closeSizeDemo();
+    });
+  }
+
   function buildOrderLines() {
     return Object.keys(cart).filter(function (id) { return cart[id] > 0 && PRODUCTS[id]; }).map(function (id) {
       var p = PRODUCTS[id];
@@ -619,6 +752,7 @@
     safe(initMobileNav, "initMobileNav");
     safe(initProductCards, "initProductCards");
     safe(initCartUI, "initCartUI");
+    safe(initSizeDemo, "initSizeDemo");
     safe(initLanguage, "initLanguage"); // also triggers first renderCart + link update
     safe(initReveals, "initReveals");
     safe(initTilt, "initTilt");
