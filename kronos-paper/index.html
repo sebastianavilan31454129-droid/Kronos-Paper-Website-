@@ -8,8 +8,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500;1,9..144,600&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='6' fill='%23ff6a2c'/%3E%3Ccircle cx='12' cy='12' r='7' stroke='%2314100c' stroke-width='1.8' fill='none'/%3E%3Ccircle cx='12' cy='12' r='3' stroke='%2314100c' stroke-width='1.8' fill='none'/%3E%3C/svg%3E">
-<link rel="stylesheet" href="styles.css?v=20260912" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='6' fill='%23122a44'/%3E%3Ccircle cx='12' cy='12' r='7' stroke='white' stroke-width='1.8' fill='none'/%3E%3Ccircle cx='12' cy='12' r='3' stroke='white' stroke-width='1.8' fill='none'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="styles.css?v=20260913" />
 </head>
 <body>
 <a class="skip-link" href="#contenido">Saltar al contenido</a>
@@ -44,28 +44,45 @@
       </svg>
       <span class="logo-word">Kronos Paper</span>
     </a>
-    <nav class="nav-links" data-nav-links aria-label="Navegación principal">
-      <a href="#aplicaciones">Aplicaciones</a>
-      <a href="#catalogo">Catálogo</a>
-      <a href="#especificaciones">Especificaciones</a>
-      <a href="#calidad">Calidad</a>
-      <a href="#contacto">Contacto</a>
-    </nav>
-    <a class="btn btn-primary btn-sm nav-cta" href="#contacto">Solicitar cotización</a>
-    <button class="nav-burger" data-burger aria-label="Abrir menú" aria-expanded="false"><span></span></button>
+    <nav class="nav-links" data-nav-links aria-label="Navegación principal"></nav>
+    <div class="nav-tools">
+      <div class="lang-toggle" role="group" aria-label="Idioma / Language">
+        <button type="button" data-lang-btn="es">ES</button>
+        <button type="button" data-lang-btn="en">EN</button>
+      </div>
+      <button class="icon-btn" type="button" data-cart-toggle data-i18n-aria="nav_cart_label" aria-label="Ver carrito">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4h2l2.4 12.2a2 2 0 0 0 2 1.8h7.2a2 2 0 0 0 2-1.6L20 8H6"/><circle cx="9" cy="20" r="1.4" fill="currentColor" stroke="none"/><circle cx="17" cy="20" r="1.4" fill="currentColor" stroke="none"/></svg>
+        <span class="cart-count" data-cart-count>0</span>
+      </button>
+      <a class="btn btn-primary btn-sm nav-cta" href="#contacto" data-i18n="nav_quote_btn">Solicitar cotización</a>
+      <button class="nav-burger" data-burger data-i18n-aria="nav_open_menu" aria-label="Abrir menú" aria-expanded="false"><span></span></button>
+    </div>
   </div>
 </header>
 
 <div class="mobile-menu" data-mobile-menu>
-  <ul data-mobile-nav-links>
-    <li><a href="#aplicaciones">Aplicaciones</a></li>
-    <li><a href="#catalogo">Catálogo</a></li>
-    <li><a href="#especificaciones">Especificaciones</a></li>
-    <li><a href="#calidad">Calidad</a></li>
-    <li><a href="#contacto">Contacto</a></li>
-  </ul>
-  <a class="btn btn-primary" href="#contacto">Solicitar cotización</a>
+  <ul data-mobile-nav-links></ul>
+  <a class="btn btn-primary" href="#contacto" data-i18n="nav_quote_btn">Solicitar cotización</a>
 </div>
+
+<div class="cart-overlay" data-cart-overlay></div>
+<aside class="cart-drawer" data-cart-drawer aria-label="Carrito de cotización">
+  <div class="cart-head">
+    <h3 data-i18n="cart_title">Tu carrito de cotización</h3>
+    <button class="cart-close" type="button" data-cart-close data-i18n-aria="cart_close" aria-label="Cerrar carrito">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M5 5l14 14M19 5L5 19"/></svg>
+    </button>
+  </div>
+  <div class="cart-items" data-cart-items></div>
+  <div class="cart-foot">
+    <div class="cart-summary" data-cart-summary></div>
+    <button class="btn btn-primary" type="button" data-cart-go-quote data-i18n="cart_go_quote">Solicitar cotización de este pedido</button>
+  </div>
+</aside>
+
+<a class="whatsapp-float" data-whatsapp-float href="#" target="_blank" rel="noopener" data-i18n-aria="social_whatsapp" aria-label="Escríbenos por WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.7-.8-2-.9-.3-.1-.5-.1-.7.1s-.7.9-.9 1.1c-.2.2-.3.2-.6.1-.3-.1-1.2-.5-2.3-1.5-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.1.2-.3.3-.4.1-.2 0-.3 0-.5s-.7-1.7-1-2.3c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2.1 3.2 5 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.7-.7 2-1.4.2-.6.2-1.2.2-1.3-.1-.1-.3-.2-.6-.3z"/><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2zm0 18.2c-1.6 0-3.1-.4-4.4-1.2l-.3-.2-3.1.8.8-3-.2-.3A8.2 8.2 0 1 1 12 20.2z"/></svg>
+</a>
 
 <main id="contenido">
 
@@ -74,26 +91,25 @@
     <div class="hero-grid" aria-hidden="true"></div>
     <div class="container hero-inner">
       <div>
-        <div class="hero-meta"><span class="dot"></span><span>Fábrica activa · Despacho hoy</span></div>
-        <span class="hero-glyph">Ø25–90mm · 44–60 g/m² · BPA-FREE</span>
-        <h1 class="hero-title" data-reveal>El papel que tu negocio <em>no nota</em> — hasta que falta.</h1>
-        <p class="hero-sub" data-reveal data-reveal-d1>Rollos térmicos y bond calibrados milímetro a milímetro para la máquina exacta donde van a vivir: impresora fiscal, datáfono, fax, calculadora o báscula.</p>
+        <div class="hero-meta"><span class="dot"></span><span data-i18n="hero_meta">Fábrica activa · Despacho hoy</span></div>
+        <span class="hero-glyph" data-i18n="hero_glyph">Ø25–90mm · 44–60 g/m² · Sin BPA</span>
+        <h1 class="hero-title" data-reveal data-i18n-html="hero_title_html">El papel que tu negocio <em>no nota</em> — hasta que falta.</h1>
+        <p class="hero-sub" data-reveal data-reveal-d1 data-i18n="hero_sub">Rollos térmicos y bond calibrados milímetro a milímetro para la máquina exacta donde van a vivir: impresora fiscal, datáfono, fax, calculadora o báscula.</p>
         <div class="hero-actions" data-reveal data-reveal-d2>
-          <a class="btn btn-primary" href="#contacto">Solicitar cotización</a>
-          <a class="btn btn-ghost" href="#especificaciones">Ver especificaciones</a>
+          <a class="btn btn-primary" href="#contacto" data-i18n="btn_quote">Solicitar cotización</a>
+          <a class="btn btn-ghost" href="#especificaciones" data-i18n="btn_specs">Ver especificaciones</a>
         </div>
       </div>
       <div class="hero-stats" data-hero-stats aria-label="Cifras de Kronos Paper"></div>
     </div>
-    <div class="hero-scroll-cue" aria-hidden="true"><span>Scroll</span><span class="line"></span></div>
   </section>
 
   <section class="manifesto section-pad">
     <div class="container manifesto-grid">
       <div class="manifesto-num" aria-hidden="true">01</div>
       <div class="manifesto-copy" data-reveal>
-        <p>No fabricamos “papel para impresora”. Fabricamos el <em>rollo exacto</em> que necesita cada motor de impresión: el núcleo correcto para que no se atasque, el diámetro correcto para que quepa en la tapa, el gramaje correcto para que la imagen térmica no se desvanezca en tres días.</p>
-        <p>Cada línea de producto nace de desarmar la máquina donde va a usarse — no de una hoja de especificaciones genérica.</p>
+        <p data-i18n-html="manifesto_p1_html">No fabricamos “papel para impresora”. Fabricamos el <em>rollo exacto</em> que necesita cada motor de impresión: el núcleo correcto para que no se atasque, el diámetro correcto para que quepa en la tapa, el gramaje correcto para que la imagen térmica no se desvanezca en tres días.</p>
+        <p data-i18n="manifesto_p2">Cada línea de producto nace de desarmar la máquina donde va a usarse — no de una hoja de especificaciones genérica.</p>
       </div>
     </div>
   </section>
@@ -101,23 +117,23 @@
   <section class="applications section-pad" id="aplicaciones">
     <div class="container">
       <div class="section-head" data-reveal>
-        <span class="kicker"><span class="dot"></span>Aplicaciones reales</span>
-        <h2>Cada rollo, calibrado para <em>su máquina</em>.</h2>
-        <p>Así se ve el papel de Kronos funcionando donde realmente trabaja.</p>
+        <span class="kicker"><span class="dot"></span><span data-i18n="apps_kicker">Aplicaciones reales</span></span>
+        <h2 data-i18n-html="apps_title_html">Cada rollo, calibrado para <em>su máquina</em>.</h2>
+        <p data-i18n="apps_sub">Así se ve el papel de Kronos funcionando donde realmente trabaja.</p>
       </div>
 
       <!-- APP 1 — Impresoras fiscales y TPV -->
       <div class="app-block">
         <div class="app-figure video-demo" data-scene>
           <div class="video-chrome video-topbar" aria-hidden="true">
-            <span class="video-badge"><span class="video-dot"></span>Demo</span>
+            <span class="video-badge"><span class="video-dot"></span><span data-i18n="video_demo_badge">Demo</span></span>
           </div>
           <svg viewBox="0 0 400 300" role="img" aria-label="Rollo térmico alimentando una impresora fiscal de punto de venta">
-            <ellipse cx="200" cy="266" rx="130" ry="10" fill="rgba(0,0,0,.35)"/>
+            <ellipse cx="200" cy="266" rx="130" ry="10" fill="rgba(18,42,68,.16)"/>
             <rect class="scene-body" x="88" y="118" width="224" height="142" rx="18"/>
             <rect class="scene-panel" x="108" y="138" width="132" height="46" rx="8"/>
             <text class="scene-screen-text" x="120" y="167" font-family="var(--mono)" font-size="16" fill="var(--ok)">TOTAL $128.40</text>
-            <circle class="scene-led" cx="104" cy="130" r="4" fill="var(--ok)"/>
+            <circle class="scene-led" cx="104" cy="130" r="4" fill="var(--spark)"/>
             <circle cx="280" cy="200" r="6" fill="none" class="scene-line"/>
             <circle cx="280" cy="220" r="6" fill="none" class="scene-line"/>
             <circle cx="298" cy="200" r="6" fill="none" class="scene-line"/>
@@ -140,16 +156,16 @@
           </svg>
           <div class="video-chrome video-bottombar">
             <div class="video-caption">
-              <span class="video-caption-eyebrow">Cómo funciona</span>
-              <p class="video-caption-text">El rollo gira, alimenta el cabezal térmico y corta el ticket al cerrar la venta.</p>
+              <span class="video-caption-eyebrow" data-i18n="app_pos_caption_eyebrow">Cómo funciona</span>
+              <p class="video-caption-text" data-i18n="app_pos_caption">El rollo gira, alimenta el cabezal térmico y corta el ticket al cerrar la venta.</p>
               <div class="video-caption-specs">
-                <span class="tag">57 / 80 mm</span>
-                <span class="tag">Núcleo 12 · 25.4 mm</span>
-                <span class="tag">48–55 g/m²</span>
+                <span class="tag" data-i18n="app_pos_v_ancho">57 / 80 mm</span>
+                <span class="tag" data-i18n="app_pos_v_nucleo">Núcleo 12 · 25.4 mm</span>
+                <span class="tag" data-i18n="app_pos_v_gramaje">48–55 g/m²</span>
               </div>
             </div>
             <div class="video-controls">
-              <button class="video-play-btn" type="button" data-video-toggle aria-label="Pausar demo">
+              <button class="video-play-btn" type="button" data-video-toggle data-i18n-aria="video_pause" aria-label="Pausar demo">
                 <svg class="icon-pause" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><rect x="3" y="2" width="3.4" height="12" rx="1"/><rect x="9.6" y="2" width="3.4" height="12" rx="1"/></svg>
                 <svg class="icon-play" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M4 2.5v11l10-5.5z"/></svg>
               </button>
@@ -158,15 +174,15 @@
           </div>
         </div>
         <div class="app-copy" data-reveal>
-          <span class="kicker"><span class="dot"></span>01 · Punto de venta</span>
-          <h3>Impresoras fiscales y TPV</h3>
-          <p class="app-summary">El rollo que soporta el ritmo de una caja: corte limpio, imagen térmica estable y compatibilidad certificada con los motores de impresión más usados en retail.</p>
+          <span class="kicker"><span class="dot"></span><span data-i18n="app_pos_kicker">01 · Punto de venta</span></span>
+          <h3 data-i18n="app_pos_title">Impresoras fiscales y TPV</h3>
+          <p class="app-summary" data-i18n="app_pos_summary">El rollo que soporta el ritmo de una caja: corte limpio, imagen térmica estable y compatibilidad certificada con los motores de impresión más usados en retail.</p>
           <div class="spec-list">
-            <div class="spec-row"><span class="k">Ancho</span><span class="v">57 / 80 mm</span></div>
-            <div class="spec-row"><span class="k">Núcleo</span><span class="v">12 · 25.4 mm</span></div>
-            <div class="spec-row"><span class="k">Diámetro externo</span><span class="v">40 – 80 mm</span></div>
-            <div class="spec-row"><span class="k">Gramaje</span><span class="v">48 – 55 g/m²</span></div>
-            <div class="spec-row"><span class="k">Compatibilidad</span><span class="v">Epson TM-T88, Bixolon, Star, Hasar</span></div>
+            <div class="spec-row"><span class="k" data-i18n="app_pos_k_ancho">Ancho</span><span class="v" data-i18n="app_pos_v_ancho">57 / 80 mm</span></div>
+            <div class="spec-row"><span class="k" data-i18n="app_pos_k_nucleo">Núcleo</span><span class="v" data-i18n="app_pos_v_nucleo">12 · 25.4 mm</span></div>
+            <div class="spec-row"><span class="k" data-i18n="app_pos_k_diam">Diámetro externo</span><span class="v" data-i18n="app_pos_v_diam">40 – 80 mm</span></div>
+            <div class="spec-row"><span class="k" data-i18n="app_pos_k_gramaje">Gramaje</span><span class="v" data-i18n="app_pos_v_gramaje">48 – 55 g/m²</span></div>
+            <div class="spec-row"><span class="k" data-i18n="app_pos_k_compat">Compatibilidad</span><span class="v" data-i18n="app_pos_v_compat">Epson TM-T88, Bixolon, Star, Hasar</span></div>
           </div>
         </div>
       </div>
@@ -175,10 +191,10 @@
       <div class="app-block is-reverse">
         <div class="app-figure video-demo" data-scene>
           <div class="video-chrome video-topbar" aria-hidden="true">
-            <span class="video-badge"><span class="video-dot"></span>Demo</span>
+            <span class="video-badge"><span class="video-dot"></span><span data-i18n="video_demo_badge">Demo</span></span>
           </div>
           <svg viewBox="0 0 400 300" role="img" aria-label="Rollo compacto alimentando un datáfono inalámbrico">
-            <ellipse cx="200" cy="266" rx="110" ry="10" fill="rgba(0,0,0,.35)"/>
+            <ellipse cx="200" cy="266" rx="110" ry="10" fill="rgba(18,42,68,.16)"/>
             <rect class="scene-body" x="140" y="40" width="120" height="220" rx="24"/>
             <rect class="scene-panel" x="155" y="58" width="90" height="56" rx="8"/>
             <text class="scene-screen-text" x="167" y="82" font-family="var(--mono)" font-size="13" fill="var(--ok)">APROBADO</text>
@@ -205,16 +221,16 @@
           </svg>
           <div class="video-chrome video-bottombar">
             <div class="video-caption">
-              <span class="video-caption-eyebrow">Cómo funciona</span>
-              <p class="video-caption-text">El terminal lee la tarjeta y el rollo compacto imprime el comprobante al instante.</p>
+              <span class="video-caption-eyebrow" data-i18n="app_datafono_caption_eyebrow">Cómo funciona</span>
+              <p class="video-caption-text" data-i18n="app_datafono_caption">El terminal lee la tarjeta y el rollo compacto imprime el comprobante al instante.</p>
               <div class="video-caption-specs">
-                <span class="tag">57 mm</span>
-                <span class="tag">Núcleo 8 mm</span>
-                <span class="tag">44 g/m²</span>
+                <span class="tag" data-i18n="app_datafono_v_ancho">57 mm</span>
+                <span class="tag" data-i18n="app_datafono_v_nucleo">Núcleo 8 mm</span>
+                <span class="tag" data-i18n="app_datafono_v_gramaje">44 g/m²</span>
               </div>
             </div>
             <div class="video-controls">
-              <button class="video-play-btn" type="button" data-video-toggle aria-label="Pausar demo">
+              <button class="video-play-btn" type="button" data-video-toggle data-i18n-aria="video_pause" aria-label="Pausar demo">
                 <svg class="icon-pause" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><rect x="3" y="2" width="3.4" height="12" rx="1"/><rect x="9.6" y="2" width="3.4" height="12" rx="1"/></svg>
                 <svg class="icon-play" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M4 2.5v11l10-5.5z"/></svg>
               </button>
@@ -223,15 +239,15 @@
           </div>
         </div>
         <div class="app-copy" data-reveal>
-          <span class="kicker"><span class="dot"></span>02 · Pago con tarjeta</span>
-          <h3>Datáfonos y terminales de pago</h3>
-          <p class="app-summary">Núcleo reducido y diámetro compacto para terminales inalámbricos: menos peso en el bolsillo del vendedor, misma nitidez en el comprobante.</p>
+          <span class="kicker"><span class="dot"></span><span data-i18n="app_datafono_kicker">02 · Pago con tarjeta</span></span>
+          <h3 data-i18n="app_datafono_title">Datáfonos y terminales de pago</h3>
+          <p class="app-summary" data-i18n="app_datafono_summary">Núcleo reducido y diámetro compacto para terminales inalámbricos: menos peso en el bolsillo del vendedor, misma nitidez en el comprobante.</p>
           <div class="spec-list">
-            <div class="spec-row"><span class="k">Ancho</span><span class="v">57 mm</span></div>
-            <div class="spec-row"><span class="k">Núcleo</span><span class="v">8 mm</span></div>
-            <div class="spec-row"><span class="k">Diámetro externo</span><span class="v">25 – 40 mm</span></div>
-            <div class="spec-row"><span class="k">Gramaje</span><span class="v">44 g/m²</span></div>
-            <div class="spec-row"><span class="k">Compatibilidad</span><span class="v">Ingenico Move, PAX A920, Verifone e355</span></div>
+            <div class="spec-row"><span class="k" data-i18n="app_datafono_k_ancho">Ancho</span><span class="v" data-i18n="app_datafono_v_ancho">57 mm</span></div>
+            <div class="spec-row"><span class="k" data-i18n="app_datafono_k_nucleo">Núcleo</span><span class="v" data-i18n="app_datafono_v_nucleo">8 mm</span></div>
+            <div class="spec-row"><span class="k" data-i18n="app_datafono_k_diam">Diámetro externo</span><span class="v" data-i18n="app_datafono_v_diam">25 – 40 mm</span></div>
+            <div class="spec-row"><span class="k" data-i18n="app_datafono_k_gramaje">Gramaje</span><span class="v" data-i18n="app_datafono_v_gramaje">44 g/m²</span></div>
+            <div class="spec-row"><span class="k" data-i18n="app_datafono_k_compat">Compatibilidad</span><span class="v" data-i18n="app_datafono_v_compat">Ingenico Move, PAX A920, Verifone e355</span></div>
           </div>
         </div>
       </div>
@@ -259,7 +275,7 @@
                   <rect class="scene-print-line" x="86" y="10" width="28" height="2" fill="var(--cream)"/>
                 </svg>
                 <div class="video-chrome video-bottombar-mini">
-                  <button class="video-play-btn" type="button" data-video-toggle aria-label="Pausar demo">
+                  <button class="video-play-btn" type="button" data-video-toggle data-i18n-aria="video_pause" aria-label="Pausar demo">
                     <svg class="icon-pause" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><rect x="3" y="2" width="3.4" height="12" rx="1"/><rect x="9.6" y="2" width="3.4" height="12" rx="1"/></svg>
                     <svg class="icon-play" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M4 2.5v11l10-5.5z"/></svg>
                   </button>
@@ -267,8 +283,8 @@
                 </div>
               </div>
               <div class="office-label">
-                <div class="office-label-row"><strong>Fax térmico</strong><span class="tag">216×30mm</span></div>
-                <p>Recibe documentos por línea telefónica y los imprime al llegar.</p>
+                <div class="office-label-row"><strong data-i18n="office_fax_title">Fax térmico</strong><span class="tag" data-i18n="office_fax_dim">216×30mm</span></div>
+                <p data-i18n="office_fax_desc">Recibe documentos por línea telefónica y los imprime al llegar.</p>
               </div>
             </div>
             <div class="office-card video-demo" data-scene>
@@ -300,7 +316,7 @@
                   <rect class="scene-print-line" x="98" y="-14" width="20" height="2" fill="var(--cream)"/>
                 </svg>
                 <div class="video-chrome video-bottombar-mini">
-                  <button class="video-play-btn" type="button" data-video-toggle aria-label="Pausar demo">
+                  <button class="video-play-btn" type="button" data-video-toggle data-i18n-aria="video_pause" aria-label="Pausar demo">
                     <svg class="icon-pause" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><rect x="3" y="2" width="3.4" height="12" rx="1"/><rect x="9.6" y="2" width="3.4" height="12" rx="1"/></svg>
                     <svg class="icon-play" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M4 2.5v11l10-5.5z"/></svg>
                   </button>
@@ -308,8 +324,8 @@
                 </div>
               </div>
               <div class="office-label">
-                <div class="office-label-row"><strong>Calculadora bond</strong><span class="tag">57mm</span></div>
-                <p>Imprime cada operación en la cinta para dejar registro de la suma.</p>
+                <div class="office-label-row"><strong data-i18n="office_calc_title">Calculadora bond</strong><span class="tag" data-i18n="office_calc_dim">57mm</span></div>
+                <p data-i18n="office_calc_desc">Imprime cada operación en la cinta para dejar registro de la suma.</p>
               </div>
             </div>
             <div class="office-card video-demo" data-scene>
@@ -332,7 +348,7 @@
                   <rect class="scene-print-line" x="176" y="52" width="2" height="18" fill="var(--cream)"/>
                 </svg>
                 <div class="video-chrome video-bottombar-mini">
-                  <button class="video-play-btn" type="button" data-video-toggle aria-label="Pausar demo">
+                  <button class="video-play-btn" type="button" data-video-toggle data-i18n-aria="video_pause" aria-label="Pausar demo">
                     <svg class="icon-pause" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><rect x="3" y="2" width="3.4" height="12" rx="1"/><rect x="9.6" y="2" width="3.4" height="12" rx="1"/></svg>
                     <svg class="icon-play" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M4 2.5v11l10-5.5z"/></svg>
                   </button>
@@ -340,21 +356,21 @@
                 </div>
               </div>
               <div class="office-label">
-                <div class="office-label-row"><strong>Báscula térmica</strong><span class="tag">58×40mm</span></div>
-                <p>Pesa el producto e imprime el ticket con el precio exacto.</p>
+                <div class="office-label-row"><strong data-i18n="office_bas_title">Báscula térmica</strong><span class="tag" data-i18n="office_bas_dim">58×40mm</span></div>
+                <p data-i18n="office_bas_desc">Pesa el producto e imprime el ticket con el precio exacto.</p>
               </div>
             </div>
           </div>
         </div>
         <div class="app-copy" data-reveal>
-          <span class="kicker"><span class="dot"></span>03 · Equipos de oficina</span>
-          <h3>Fax, calculadoras y básculas</h3>
-          <p class="app-summary">Tres máquinas, tres formatos de rollo distintos: papel térmico ancho para fax, bond bicapa para sumadoras y ticket calibrado para el peso exacto en báscula.</p>
+          <span class="kicker"><span class="dot"></span><span data-i18n="app_oficina_kicker">03 · Equipos de oficina</span></span>
+          <h3 data-i18n="app_oficina_title">Fax, calculadoras y básculas</h3>
+          <p class="app-summary" data-i18n="app_oficina_summary">Tres máquinas, tres formatos de rollo distintos: papel térmico ancho para fax, bond bicapa para sumadoras y ticket calibrado para el peso exacto en báscula.</p>
           <div class="spec-list">
-            <div class="spec-row"><span class="k">Fax</span><span class="v">216 mm · núcleo 12 mm</span></div>
-            <div class="spec-row"><span class="k">Calculadora</span><span class="v">57 mm bond · núcleo 11.5 mm</span></div>
-            <div class="spec-row"><span class="k">Báscula</span><span class="v">58 mm térmico · núcleo 12 mm</span></div>
-            <div class="spec-row"><span class="k">Compatibilidad</span><span class="v">Panasonic, Casio, Toledo, CAS, Dibal</span></div>
+            <div class="spec-row"><span class="k" data-i18n="app_oficina_k_fax">Fax</span><span class="v" data-i18n="app_oficina_v_fax">216 mm · núcleo 12 mm</span></div>
+            <div class="spec-row"><span class="k" data-i18n="app_oficina_k_calc">Calculadora</span><span class="v" data-i18n="app_oficina_v_calc">57 mm bond · núcleo 11.5 mm</span></div>
+            <div class="spec-row"><span class="k" data-i18n="app_oficina_k_bas">Báscula</span><span class="v" data-i18n="app_oficina_v_bas">58 mm térmico · núcleo 12 mm</span></div>
+            <div class="spec-row"><span class="k" data-i18n="app_oficina_k_compat">Compatibilidad</span><span class="v" data-i18n="app_oficina_v_compat">Panasonic, Casio, Toledo, CAS, Dibal</span></div>
           </div>
         </div>
       </div>
@@ -365,31 +381,31 @@
   <section class="showcase" id="catalogo">
     <div class="container showcase-head">
       <div class="section-head" data-reveal>
-        <span class="kicker"><span class="dot"></span>Catálogo</span>
-        <h2>Ocho líneas de rollo, <em>un solo proveedor</em>.</h2>
-        <p>Desliza para ver el formato exacto que necesita tu equipo.</p>
+        <span class="kicker"><span class="dot"></span><span data-i18n="showcase_kicker">Catálogo</span></span>
+        <h2 data-i18n-html="showcase_title_html">Ocho líneas de rollo, <em>un solo proveedor</em>.</h2>
+        <p data-i18n="showcase_sub">Desliza para ver el formato exacto que necesita tu equipo.</p>
       </div>
     </div>
     <div class="showcase-viewport">
       <div class="showcase-track" data-showcase aria-label="Catálogo de rollos Kronos Paper"></div>
     </div>
     <div class="container">
-      <div class="showcase-hint"><span>Desliza o haz scroll</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+      <div class="showcase-hint"><span data-i18n="showcase_hint">Desliza o haz scroll</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
     </div>
   </section>
 
   <section class="specs-section section-pad" id="especificaciones">
     <div class="container">
       <div class="section-head" data-reveal>
-        <span class="kicker"><span class="dot"></span>Ficha técnica</span>
-        <h2>Especificaciones <em>comparadas</em>.</h2>
-        <p>Los mismos datos que verías en nuestra hoja de producto, en una sola tabla.</p>
+        <span class="kicker"><span class="dot"></span><span data-i18n="specs_kicker">Ficha técnica</span></span>
+        <h2 data-i18n-html="specs_title_html">Especificaciones <em>comparadas</em>.</h2>
+        <p data-i18n="specs_sub">Los mismos datos que verías en nuestra hoja de producto, en una sola tabla.</p>
       </div>
       <div class="specs-table-wrap" data-reveal>
         <table class="specs-table">
           <thead>
             <tr>
-              <th>Línea</th><th>Aplicación</th><th>Ancho</th><th>Diámetro ext.</th><th>Núcleo</th><th>Gramaje</th><th>Longitud</th>
+              <th data-i18n="specs_th_line">Línea</th><th data-i18n="specs_th_app">Aplicación</th><th data-i18n="specs_th_width">Ancho</th><th data-i18n="specs_th_diam">Diámetro ext.</th><th data-i18n="specs_th_core">Núcleo</th><th data-i18n="specs_th_gsm">Gramaje</th><th data-i18n="specs_th_length">Longitud</th>
             </tr>
           </thead>
           <tbody data-specs-table></tbody>
@@ -401,9 +417,9 @@
   <section class="quality-section section-pad" id="calidad">
     <div class="container">
       <div class="section-head" data-reveal>
-        <span class="kicker"><span class="dot"></span>Calidad</span>
-        <h2>No es solo papel, es <em>consistencia</em>.</h2>
-        <p>Tres compromisos que sostenemos en cada bobina que sale de planta.</p>
+        <span class="kicker"><span class="dot"></span><span data-i18n="quality_kicker">Calidad</span></span>
+        <h2 data-i18n-html="quality_title_html">No es solo papel, es <em>consistencia</em>.</h2>
+        <p data-i18n="quality_sub">Tres compromisos que sostenemos en cada bobina que sale de planta.</p>
       </div>
       <div class="quality-grid" data-quality></div>
     </div>
@@ -412,8 +428,8 @@
   <section class="testimonials-section section-pad">
     <div class="container">
       <div class="section-head" data-reveal>
-        <span class="kicker"><span class="dot"></span>Clientes</span>
-        <h2>Lo que dicen quienes <em>ya no piensan en el papel</em>.</h2>
+        <span class="kicker"><span class="dot"></span><span data-i18n="testi_kicker">Clientes</span></span>
+        <h2 data-i18n-html="testi_title_html">Lo que dicen quienes <em>ya no piensan en el papel</em>.</h2>
       </div>
       <div class="testi-wrap" data-testimonials></div>
     </div>
@@ -426,53 +442,54 @@
   <section class="cta-section section-pad" id="contacto">
     <div class="container cta-grid">
       <div class="cta-copy" data-reveal>
-        <span class="kicker"><span class="dot"></span>Cotización</span>
-        <h2>Cuéntanos qué máquina <em>alimenta</em>.</h2>
-        <p>Dinos el equipo, el volumen mensual y te devolvemos una cotización con el formato exacto de rollo — no una lista genérica.</p>
+        <span class="kicker"><span class="dot"></span><span data-i18n="cta_kicker">Cotización</span></span>
+        <h2 data-i18n-html="cta_title_html">Cuéntanos qué máquina <em>alimenta</em>.</h2>
+        <p data-i18n="cta_sub">Dinos el equipo, el volumen mensual y te devolvemos una cotización con el formato exacto de rollo — no una lista genérica.</p>
         <ul class="cta-contact-list" data-contact aria-label="Datos de contacto"></ul>
+        <div class="social-row" data-social aria-label="Redes sociales"></div>
       </div>
       <div class="card form-card" data-reveal>
         <form class="form-grid" data-quote-form novalidate>
           <div class="field-row">
             <div class="field">
-              <label for="f-name">Nombre</label>
-              <input id="f-name" name="name" type="text" placeholder="Tu nombre" required />
+              <label for="f-name" data-i18n="form_name">Nombre</label>
+              <input id="f-name" name="name" type="text" data-i18n-placeholder="form_name_ph" placeholder="Tu nombre" required />
             </div>
             <div class="field">
-              <label for="f-company">Empresa</label>
-              <input id="f-company" name="company" type="text" placeholder="Nombre de tu negocio" required />
+              <label for="f-company" data-i18n="form_company">Empresa</label>
+              <input id="f-company" name="company" type="text" data-i18n-placeholder="form_company_ph" placeholder="Nombre de tu negocio" required />
             </div>
           </div>
           <div class="field-row">
             <div class="field">
-              <label for="f-email">Correo</label>
-              <input id="f-email" name="email" type="email" placeholder="tu@empresa.com" required />
+              <label for="f-email" data-i18n="form_email">Correo</label>
+              <input id="f-email" name="email" type="email" data-i18n-placeholder="form_email_ph" placeholder="tu@empresa.com" required />
             </div>
             <div class="field">
-              <label for="f-machine">Tipo de equipo</label>
+              <label for="f-machine" data-i18n="form_machine">Tipo de equipo</label>
               <select id="f-machine" name="machine" required>
-                <option value="">Selecciona…</option>
-                <option value="fiscal">Impresora fiscal / TPV</option>
-                <option value="datafono">Datáfono / terminal de pago</option>
-                <option value="fax">Fax</option>
-                <option value="calculadora">Calculadora / sumadora</option>
-                <option value="bascula">Báscula</option>
-                <option value="otro">Otro</option>
+                <option value="" data-i18n="form_machine_select">Selecciona…</option>
+                <option value="fiscal" data-i18n="form_opt_fiscal">Impresora fiscal / TPV</option>
+                <option value="datafono" data-i18n="form_opt_datafono">Datáfono / terminal de pago</option>
+                <option value="fax" data-i18n="form_opt_fax">Fax</option>
+                <option value="calculadora" data-i18n="form_opt_calc">Calculadora / sumadora</option>
+                <option value="bascula" data-i18n="form_opt_bas">Báscula</option>
+                <option value="otro" data-i18n="form_opt_other">Otro</option>
               </select>
             </div>
           </div>
           <div class="field">
-            <label for="f-msg">Volumen mensual y detalles</label>
-            <textarea id="f-msg" name="message" placeholder="Ej: 40 cajas, rollo 80×80, entrega quincenal"></textarea>
+            <label for="f-msg" data-i18n="form_msg">Volumen mensual y detalles</label>
+            <textarea id="f-msg" name="message" data-i18n-placeholder="form_msg_ph" placeholder="Ej: 40 cajas, rollo 80×80, entrega quincenal"></textarea>
           </div>
-          <button class="btn btn-primary form-submit" type="submit" data-form-submit>Solicitar cotización</button>
-          <p class="form-note">Respondemos en menos de un día hábil con precio y disponibilidad.</p>
+          <button class="btn btn-primary form-submit" type="submit" data-form-submit data-i18n="btn_quote">Solicitar cotización</button>
+          <p class="form-note" data-i18n="form_note">Respondemos en menos de un día hábil con precio y disponibilidad.</p>
         </form>
         <div class="form-success" data-form-success>
           <svg viewBox="0 0 52 52" fill="none"><circle cx="26" cy="26" r="24" stroke="var(--ok)" stroke-width="2"/><path class="checkmark-path" d="M15 27l8 8 15-16" stroke="var(--ok)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
-          <h3>Solicitud recibida</h3>
-          <p>Un asesor de Kronos Paper revisará tu equipo y te escribirá con la ficha exacta de rollo.</p>
-          <button class="btn btn-ghost btn-sm" type="button" data-form-success-close>Cerrar</button>
+          <h3 data-i18n="form_success_title">Solicitud recibida</h3>
+          <p data-i18n="form_success_body">Un asesor de Kronos Paper revisará tu equipo y te escribirá con la ficha exacta de rollo.</p>
+          <button class="btn btn-ghost btn-sm" type="button" data-form-success-close data-i18n="form_close">Cerrar</button>
         </div>
       </div>
     </div>
@@ -497,31 +514,32 @@
             <span class="logo-tagline">Labels &amp; Thermal Paper</span>
           </span>
         </a>
-        <p>Papel térmico y bond de precisión para el ecosistema de punto de venta.</p>
+        <p data-i18n="footer_tagline">Papel térmico y bond de precisión para el ecosistema de punto de venta.</p>
+        <div class="social-row" data-social aria-label="Redes sociales"></div>
       </div>
       <div class="footer-col">
-        <h5>Navegación</h5>
+        <h5 data-i18n="footer_nav_h">Navegación</h5>
         <ul>
-          <li><a href="#aplicaciones">Aplicaciones</a></li>
-          <li><a href="#catalogo">Catálogo</a></li>
-          <li><a href="#especificaciones">Especificaciones</a></li>
+          <li><a href="#aplicaciones" data-i18n="nav_aplicaciones">Aplicaciones</a></li>
+          <li><a href="#catalogo" data-i18n="nav_catalogo">Catálogo</a></li>
+          <li><a href="#especificaciones" data-i18n="nav_especificaciones">Especificaciones</a></li>
         </ul>
       </div>
       <div class="footer-col">
-        <h5>Empresa</h5>
+        <h5 data-i18n="footer_company_h">Empresa</h5>
         <ul>
-          <li><a href="#calidad">Calidad</a></li>
-          <li><a href="#contacto">Contacto</a></li>
+          <li><a href="#calidad" data-i18n="nav_calidad">Calidad</a></li>
+          <li><a href="#contacto" data-i18n="nav_contacto">Contacto</a></li>
         </ul>
       </div>
       <div class="footer-col">
-        <h5>Contacto</h5>
+        <h5 data-i18n="footer_contact_h">Contacto</h5>
         <ul data-contact></ul>
       </div>
     </div>
     <div class="footer-bottom">
-      <span>© <span data-year></span> Kronos Paper. Todos los derechos reservados.</span>
-      <span>Sitio construido con GSAP + CSS — sin frameworks.</span>
+      <span>© <span data-year></span> Kronos Paper. <span data-i18n="footer_rights">Todos los derechos reservados.</span></span>
+      <span data-i18n="footer_built">Sitio construido con GSAP + CSS — sin frameworks.</span>
     </div>
   </div>
 </footer>
@@ -529,6 +547,6 @@
 <script defer src="lib/gsap.min.js"></script>
 <script defer src="lib/ScrollTrigger.min.js"></script>
 <script defer src="lib/manifest.js"></script>
-<script defer src="main.js?v=20260912"></script>
+<script defer src="main.js?v=20260913"></script>
 </body>
 </html>
