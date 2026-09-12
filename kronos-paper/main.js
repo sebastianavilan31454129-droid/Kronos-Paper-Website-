@@ -318,6 +318,22 @@
   }
 
   /* ---------------------------------------------------------------
+     Video-demo chrome — manual play/pause toggle
+  --------------------------------------------------------------- */
+  function initVideoDemos() {
+    var demos = $$(".video-demo");
+    if (!demos.length) return;
+    demos.forEach(function (demo) {
+      var btn = $("[data-video-toggle]", demo);
+      if (!btn) return;
+      btn.addEventListener("click", function () {
+        var nowPaused = demo.classList.toggle("is-paused");
+        btn.setAttribute("aria-label", nowPaused ? "Reproducir demo" : "Pausar demo");
+      });
+    });
+  }
+
+  /* ---------------------------------------------------------------
      Tilt on cards
   --------------------------------------------------------------- */
   function initTilt() {
@@ -455,6 +471,7 @@
     safe(initReveals, "initReveals");
     safe(initCountUp, "initCountUp");
     safe(initMachineScenes, "initMachineScenes");
+    safe(initVideoDemos, "initVideoDemos");
     safe(initTilt, "initTilt");
     safe(initForm, "initForm");
 
